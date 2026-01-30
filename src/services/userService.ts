@@ -7,10 +7,7 @@ export class UserService implements UserPort {
   	constructor(private repo: UserRepositoryPort) {}
 
 	async authentificate(userFromApp: User): Promise<boolean> {
-		console.log("userFromApp", userFromApp);
 		const userFromDb = await this.repo.findByName(userFromApp.name);
-
-		console.log("userFromDb", userFromDb);
 
 		if (!userFromDb) return false;
 

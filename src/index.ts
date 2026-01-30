@@ -44,7 +44,6 @@ app.post("/token", (req: Request, res: Response) => {
 			if (err || !decoded) return res.sendStatus(403);
 
 			const user = decoded as JwtPayload;
-			console.log("user",user)
 			const accessToken = generateAccessToken({ name: user.name });
 
 			res.json({ accessToken });
