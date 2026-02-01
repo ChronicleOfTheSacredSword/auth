@@ -63,6 +63,11 @@ app.delete("/logout", (req: Request, res: Response) => {
 
 app.post("/login", async (req: Request, res: Response) => {
 	const user: User = req.body;
+	
+	if(!user.name || !user.password ){
+		res.sendStatus(400);
+	}
+
 	const auth = await user_controller.authUser(user);
 
 	if(auth){
