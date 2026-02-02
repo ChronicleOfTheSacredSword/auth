@@ -7,7 +7,6 @@ import { User } from '../src/domain/user';
 import { UserRepo } from './adapters/driven/userRepo';
 import { UserService } from './services/userService';
 import { UserController } from './adapters/driving/userController';
-import authenticateToken from './authJWToken';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -49,10 +48,6 @@ app.post("/token", (req: Request, res: Response) => {
 			res.json({ accessToken });
 		}
 	);
-});
-
-app.get('/tests', authenticateToken, (req, res) => {
-  	res.json({message: "caca"})
 });
 
 app.delete("/logout", (req: Request, res: Response) => {
