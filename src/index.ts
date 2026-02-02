@@ -50,8 +50,8 @@ app.post("/token", (req: Request, res: Response) => {
 	);
 });
 
-app.delete("/logout", (req: Request, res: Response) => {
-	const refreshToken: string | undefined = req.body.token;
+app.delete("/logout/:token", (req: Request, res: Response) => {
+	const refreshToken: string | string[] = req.params.token;
 	refreshTokens = refreshTokens.filter(token => token !== refreshToken);
 	res.sendStatus(204);
 });
