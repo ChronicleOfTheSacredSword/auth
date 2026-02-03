@@ -8,7 +8,11 @@ import { UserRepo } from './adapters/driven/userRepo';
 import { UserService } from './services/userService';
 import { UserController } from './adapters/driving/userController';
 
+const cors = require('cors');
 const app = express();
+app.use(express.json());
+app.use(cors({ origin: 'http://localhost:9000' }));
+
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
