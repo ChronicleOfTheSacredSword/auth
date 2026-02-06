@@ -67,15 +67,15 @@ app.post("/login", async (req: Request, res: Response) => {
 		res.sendStatus(400);
 	}
 
-	const auth = await user_controller.authUser(user);
+	const { isAuthenticated, userWithID } = await user_controller.authUser(user);
 
-	if(auth){
+	if(isAuthenticated){
 		const accessToken = generateAccessToken({ name: user.name });
 		const refreshToken = jwt.sign(user.name, REFRESH_TOKEN_SECRET);
-
+		console.log("je suis ici", userWithID);
 		refreshTokens.push(refreshToken);
 
-		res.json({acces: accessToken, refresh: refreshToken});
+		res.json({accesToken: accessToken, refreshToken: refreshToken, user: userWithID});
 	}
 	else{
 		res.sendStatus(403);

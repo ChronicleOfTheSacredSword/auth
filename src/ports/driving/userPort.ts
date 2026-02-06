@@ -1,4 +1,4 @@
 import { User } from '../../domain/user';
 export interface UserPort {
-	authentificate(userFromApp: User): Promise<Boolean>;
+	authenticate(userFromApp: User): Promise<{ isAuthenticated: Boolean, userWithID: User | null }>;
 }

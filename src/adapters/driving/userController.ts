@@ -10,6 +10,6 @@ export class UserController {
 	}
 
 	async authUser(user: User) {
-		return await this.service_user.authentificate(user);
+		return await this.service_user.authenticate(user);
 	}
 }

@@ -6,17 +6,23 @@ import bcrypt from "bcrypt";
 export class UserService implements UserPort {
   	constructor(private repo: UserRepositoryPort) {}
 
-	async authentificate(userFromApp: User): Promise<boolean> {
+	async authenticate(userFromApp: User): Promise<{ isAuthenticated: Boolean, userWithID: User | null }> {
 		const userFromDb = await this.repo.findByName(userFromApp.name);
 
-		if (!userFromDb) return false;
+		if (!userFromDb) {
+			return { isAuthenticated: false, userWithID: null };
+		}
 
 		const passwordMatches = await bcrypt.compare(
 			userFromApp.password!,
 			userFromDb.password!
 		);
-
-		return passwordMatches;
+		if (passwordMatches) {
+			delete userFromDb.password;
+			return { isAuthenticated: true, userWithID: userFromDb };
+		}
+		return { isAuthenticated: false, userWithID: null };
 	}
+
 
 }
