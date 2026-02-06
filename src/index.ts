@@ -75,7 +75,7 @@ app.post("/login", async (req: Request, res: Response) => {
 		console.log("je suis ici", userWithID);
 		refreshTokens.push(refreshToken);
 
-		res.json({accesToken: accessToken, refreshToken: refreshToken, user: userWithID});
+		res.json({accessToken: accessToken, refreshToken: refreshToken, user: userWithID});
 	}
 	else{
 		res.sendStatus(403);
