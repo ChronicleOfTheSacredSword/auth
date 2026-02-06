@@ -75,7 +75,7 @@ app.post("/login", async (req: Request, res: Response) => {
 
 		refreshTokens.push(refreshToken);
 
-		res.json({accessToken, refreshToken});
+		res.json({acces: accessToken, refresh: refreshToken});
 	}
 	else{
 		res.sendStatus(403);
